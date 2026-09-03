@@ -1,0 +1,20 @@
+# Environment & Secrets
+.env
+.env.*
+!.env.example
+
+# Framework Configs
+config.json
+config.json.template
+project/config.json
+
+# Dependencies & Build Output
+/htdocs/vendor/
+/vendor/
+/node_modules/
+
+# Logs & Temporary Files
+*.log
+.DS_Store
+Thumbs.db
+.vscode/
