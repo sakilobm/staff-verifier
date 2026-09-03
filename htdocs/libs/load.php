@@ -61,6 +61,7 @@ $wapi->initiateSession();
 
 /**
  * Universal config reader – Checks .env first, then config.json.
+ * Auto-detects base_path if not explicitly forced.
  *
  * @param string $key     The key to read (can be ENV_CONSTANT or json_key)
  * @param mixed  $default Default value if not found
@@ -68,6 +69,14 @@ $wapi->initiateSession();
  */
 function get_config(string $key, $default = null)
 {
+    // Auto-detect base_path based on current request environment
+    if ($key === 'base_path') {
+        if (!empty($_ENV['BASE_PATH'])) return $_ENV['BASE_PATH'];
+        $scriptDir = dirname($_SERVER['SCRIPT_NAME'] ?? '/');
+        $base = ($scriptDir === '/' || $scriptDir === '\\' || $scriptDir === '.') ? '/' : rtrim($scriptDir, '/') . '/';
+        return $base;
+    }
+
     // 1. Try Environment Variables
     $envValue = $_ENV[strtoupper($key)] ?? $_SERVER[strtoupper($key)] ?? false;
     if ($envValue !== false) return $envValue;
