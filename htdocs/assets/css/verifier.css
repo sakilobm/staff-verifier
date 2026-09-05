@@ -270,7 +270,7 @@ body::before{
   font-size:11.5px; font-weight:600;
   text-decoration:none;
 }
-.theme-btn, .menu-btn, .login-header-btn{
+.theme-btn, .menu-btn, .login-header-btn, .lang-btn{
   border:1px solid var(--glass-border);
   background:var(--bg-card);
   backdrop-filter:blur(10px);
