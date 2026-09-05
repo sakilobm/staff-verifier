@@ -12,7 +12,6 @@ ErrorDocument 404 error.php
 ErrorDocument 500 error.php
 
 RewriteEngine On
-RewriteBase /staff-verifier/htdocs/
 
 # --- Static asset pass-through ---
 RewriteCond %{REQUEST_FILENAME} -f [OR]
