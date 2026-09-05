@@ -78,7 +78,7 @@ body {
     background: var(--background);
     color: var(--text-primary);
     line-height: var(--lh-body);
-    cursor: none;        /* Custom ball cursor replaces default */
+    cursor: default;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
 }
@@ -223,7 +223,7 @@ button:hover ~ .ball::before { width: 48px; height: 48px; top: -20px; left: -20p
     font-weight: 600;
     letter-spacing: 0.05em;
     text-transform: uppercase;
-    cursor: none;
+    cursor: pointer;
     transition: var(--transition);
     border: 2px solid transparent;
 }

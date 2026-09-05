@@ -24,18 +24,18 @@ if ($currentUser) {
     <div class="gate-icon-badge">
       <svg class="icon-svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
     </div>
-    <h2>சரிபார்ப்பாளர் விவரம் / Verifier Details</h2>
-    <p class="gate-sub">தொடர்வதற்கு முன் உங்கள் தொலைபேசி எண் மற்றும் ஜிமெயில் ஐடியை உள்ளிடவும் / Enter your phone number and Gmail ID before you can access this list</p>
-    <label>தொலைபேசி எண் / Phone number</label>
-    <input id="gatePhone" type="tel" inputmode="numeric" placeholder="9876543210" maxlength="15" value="<?= htmlspecialchars($userPhone, ENT_QUOTES) ?>">
-    <label>ஜிமெயில் / Gmail</label>
+    <h2>Verifier Details</h2>
+    <p class="gate-sub">Please enter your phone number and Gmail address to access the verification register.</p>
+    <label for="gatePhone">Phone Number</label>
+    <input id="gatePhone" type="tel" inputmode="numeric" placeholder="Enter 10-digit mobile number" maxlength="15" value="<?= htmlspecialchars($userPhone, ENT_QUOTES) ?>">
+    <label for="gateEmail">Gmail Address</label>
     <input id="gateEmail" type="email" placeholder="name@gmail.com" value="<?= htmlspecialchars($userEmail, ENT_QUOTES) ?>">
     <div class="gate-error" id="gateError"></div>
-    <button class="gate-submit" onclick="submitGate()">தொடரவும் / Continue</button>
+    <button class="gate-submit" onclick="submitGate()">Continue</button>
 
     <?php if (!$isAuth): ?>
     <div class="gate-auth-link">
-      ஏற்கனவே கணக்கு உள்ளதா? <a href="<?= get_config('base_path') ?>login">உள்நுழைக / Sign In</a>
+      Already have an account? <a href="<?= get_config('base_path') ?>login">Sign In</a>
     </div>
     <?php endif; ?>
   </div>
@@ -331,7 +331,9 @@ function checkGate() {
       }
     }
   } catch(e){}
-  document.getElementById('gateOverlay').style.display = 'flex';
+  const overlay = document.getElementById('gateOverlay');
+  overlay.style.display = 'flex';
+  setTimeout(() => { const el = document.getElementById('gatePhone'); if (el) el.focus(); }, 100);
 }
 
 function submitGate() {
@@ -342,12 +344,12 @@ function submitGate() {
 
   const cleanPhone = phone.replace(/[^0-9]/g, '');
   if (cleanPhone.length < 10) {
-    err.textContent = 'சரியான தொலைபேசி எண்ணை உள்ளிடவும் (குறைந்தது 10 இலக்கங்கள்) / Enter valid phone number';
+    err.textContent = 'Please enter a valid 10-digit phone number.';
     return;
   }
   const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRe.test(email) || !email.toLowerCase().includes('gmail.com')) {
-    err.textContent = 'சரியான ஜிமெயில் ஐடியை உள்ளிடவும் / Enter a valid Gmail ID';
+    err.textContent = 'Please enter a valid Gmail address (e.g. name@gmail.com).';
     return;
   }
 
@@ -359,7 +361,9 @@ function submitGate() {
 function changeVerifierInfo() {
   closeSheet();
   try { localStorage.removeItem('staffVerifierInfo'); } catch(e){}
-  document.getElementById('gateOverlay').style.display = 'flex';
+  const overlay = document.getElementById('gateOverlay');
+  overlay.style.display = 'flex';
+  setTimeout(() => { const el = document.getElementById('gatePhone'); if (el) el.focus(); }, 100);
 }
 
 // --- Data Loading from MySQL API ---

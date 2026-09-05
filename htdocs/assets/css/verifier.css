@@ -87,11 +87,21 @@ body{
   font-family:'Inter',system-ui,-apple-system,sans-serif;
   -webkit-font-smoothing:antialiased;
   -moz-osx-font-smoothing:grayscale;
+  cursor:default;
   padding-bottom:calc(90px + env(safe-area-inset-bottom));
   min-height:100vh;
   min-height:100dvh;
   overflow-x:hidden;
   transition:background .25s ease, color .25s ease;
+}
+
+input, textarea{
+  cursor:text !important;
+  caret-color:var(--teal) !important;
+}
+
+button, a, label, select, .chip, .college-row, .theme-btn, .menu-btn, .gate-submit{
+  cursor:pointer;
 }
 
 body::before{
@@ -174,12 +184,16 @@ body::before{
   font-family:'Inter',sans-serif;
   background:var(--bg-secondary);
   color:var(--text-primary);
+  caret-color:var(--teal);
+  cursor:text;
   transition:border-color .2s, box-shadow .2s;
   outline:none;
 }
 .gate-card input:focus{
   border-color:var(--teal);
   box-shadow:0 0 0 3px var(--teal-glow);
+  caret-color:var(--teal);
+  cursor:text;
 }
 .gate-card input::placeholder{color:var(--text-muted);}
 .gate-error{color:var(--red); font-size:12px; min-height:16px; margin-top:8px;}
